@@ -1,0 +1,45 @@
+{
+    "name": "nodejs-ts-boilerplate",
+    "version": "1.0.0",
+    "description": "A simple nodejs project with all necessary dependencies to use Typescript",
+    "scripts": {
+        "prestart": "gulp",
+        "start": "node ./dist/bin/www.js"
+    },
+    "author": "Giorgio Federici",
+    "license": "ISC",
+    "devDependencies": {
+        "@types/body-parser": "^1.17.0",
+        "@types/chai": "^4.1.7",
+        "@types/chai-http": "^3.0.5",
+        "@types/cors": "^2.8.4",
+        "@types/errorhandler": "0.0.32",
+        "@types/mocha": "^5.2.6",
+        "@types/mongodb": "^3.1.20",
+        "@types/mongoose": "^5.3.20",
+        "@types/morgan": "^1.7.35",
+        "@types/node": "^11.10.4",
+        "chai": "^4.2.0",
+        "chai-http": "^4.2.1",
+        "codelyzer": "^4.5.0",
+        "del": "^4.0.0",
+        "gulp": "^4.0.0",
+        "gulp-mocha": "^6.0.0",
+        "gulp-sourcemaps": "^2.6.5",
+        "gulp-typescript": "^5.0.0",
+        "mocha": "^6.0.2",
+        "mocha-typescript": "^1.1.17",
+        "protractor": "^5.4.2",
+        "ts-node": "^8.0.2",
+        "tslint": "^5.13.1",
+        "typescript": "~3.2.2"
+    },
+    "dependencies": {
+        "body-parser": "^1.18.3",
+        "cors": "^2.8.5",
+        "errorhandler": "^1.5.0",
+        "express": "^4.16.4",
+        "mongoose": "^5.4.17",
+        "morgan": "^1.9.1"
+    }
+}
