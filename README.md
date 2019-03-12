@@ -2,9 +2,7 @@
 A simple nodejs project with all necessary dependencies to use Typescript.
 
 ## Commands to start the server
-$ gulp
-$ chmod +x ./dist/bin/www
-$ ./dist/bin/www
+npm start
 
 ## CORS
 CORS configured to accept request by Angular on the same host
