@@ -4,8 +4,8 @@ A simple nodejs project with all necessary dependencies to use Typescript.
 ## Commands to start the server
 npm start
 
-## CORS
-CORS configured to accept request from localhost.
+## DB
+MongoDB with Mongoose
 
 ## Versions
-1.0.0 - created and used on Ubuntu 16.04.5 LTS (GNU/Linux 4.4.0-142-generic x86_64)
+1.0.0 - created and used on Windows 10
