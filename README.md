@@ -5,8 +5,8 @@ A simple nodejs project with all necessary dependencies to use Typescript.
 npm start
 
 ## Backend
-NodeJS
-Express
+NodeJS<br />
+Express<br />
 Mongoose
 
 ## DB
