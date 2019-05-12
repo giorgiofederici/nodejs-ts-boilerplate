@@ -1,19 +1,18 @@
 'use strict';
 
 //module dependencies
-var server = require('../server/server');
+var server = require('../src/server');
 var debug = require('debug')('express:server');
 var http = require('http');
 
 //create http server
-var httpPort = normalizePort(process.env.PORT || 3000);
+var httpPort = normalizePort(process.env.PORT || 5000);
 var app = server.Server.bootstrap().app;
 app.set('port', httpPort);
 var httpServer = http.createServer(app);
 
 //listen on provided ports
 httpServer.listen(httpPort);
-
 //add error handler
 httpServer.on('error', onError);
 
@@ -44,13 +43,14 @@ function normalizePort(val) {
  * Event listener for HTTP server 'error' event.
  */
 function onError(error) {
+
   if (error.syscall !== 'listen') {
     throw error;
   }
 
-  var bind = typeof port === 'string'
-    ? 'Pipe ' + port
-    : 'Port ' + port;
+  var bind = typeof httpPort === 'string'
+    ? 'Pipe ' + httpPort
+    : 'Port ' + httpPort;
 
   // handle specific listen errors with friendly messages
   switch (error.code) {

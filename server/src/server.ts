@@ -1,9 +1,13 @@
-import * as bodyParser from 'body-parser';
-import * as express from 'express';
-import * as morgan from 'morgan';
-import errorHandler = require('errorhandler');
-import mongoose = require('mongoose');
-import * as cors from 'cors';
+import bodyParser from 'body-parser';
+import express from 'express';
+import morgan from 'morgan';
+import errorHandler from 'errorhandler';
+import mongoose from 'mongoose';
+import cors from 'cors';
+import bluebird from 'bluebird';
+
+// Env
+import { MONGODB_URI } from './configs/environment';
 
 
 /**
@@ -31,13 +35,13 @@ export class Server {
      * @constructor
      */
     constructor() {
-        //create expressjs application
+        // Create expressjs application
         this.app = express();
 
-        //configure application
+        // Configure application
         this.config();
 
-        //add api
+        // Add api
         this.api();
     }
 
@@ -47,30 +51,30 @@ export class Server {
      * @class Server
      */
     public api() {
-        var router = express.Router();
+        // const router = express.Router();
 
-        // configure CORS
+        // Configure CORS
+        this.app.use(cors());
+
+        /*
         const corsOptions: cors.CorsOptions = {
             allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'X-Access-Token'],
             credentials: true,
             methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
-            origin: 'http://localhost:4200',
+            origin: 'http://localhost',
             preflightContinue: false
         };
         router.use(cors(corsOptions));
+        */
 
-        // root request
-        router.get('/', (req: express.Request, res: express.Response, next: express.NextFunction) => {
+        // Root request
+        this.app.get('/', (req: express.Request, res: express.Response, next: express.NextFunction) => {
             res.json({ announcement: 'Welcome to our API.' });
             next();
         });
 
-        // create API routes
-
-        // wire up the REST API
-
-        // enable CORS pre-flight
-        router.options('*', cors(corsOptions));
+        // Enable CORS pre-flight
+        // router.options('*', cors(corsOptions));
     }
 
     /**
@@ -79,30 +83,32 @@ export class Server {
      * @class Server
      */
     public config() {
-        // morgan middleware to log HTTP requests
+        // Morgan middleware to log HTTP requests
         this.app.use(morgan('dev'));
 
-        //use json form parser middlware
+        // Use json form parser middlware
         this.app.use(bodyParser.json());
 
-        //use query string parser middlware
+        // Use query string parser middlware
         this.app.use(bodyParser.urlencoded({
             extended: true
         }));
 
-        // connect to mongoose
-        mongoose.connect('mongodb://localhost:27017/myDB', { useNewUrlParser: true });
+        // Connect to mongoose
+        (<any>mongoose).Promise = bluebird;
+        const mongoUrl = MONGODB_URI;
+        mongoose.connect(mongoUrl, { useNewUrlParser: true });
         mongoose.connection.on('error', error => {
             console.error(error);
         });
 
-        //catch 404 and forward to error handler
+        // Catch 404 and forward to error handler
         this.app.use(function (err: any, req: express.Request, res: express.Response, next: express.NextFunction) {
             err.status = 404;
             next(err);
         });
 
-        //error handling
+        // Error handling
         this.app.use(errorHandler());
     }
 }
